@@ -15,6 +15,17 @@ steps:
              Copy-Item -Path $(System.DefaultWorkingDirectory)\* -Destination $(System.DefaultWorkingDirectory)\Publish\ -Recurse
           displayName: 'Copy files to Publish directory' 
 
+        
+        - task: AzureResourceGroupDeployment@2
+          inputs:
+                azureSubscription: 'AzureServiceConnection'
+                action: 'Create Or Update Resource Group'
+                resourceGroupName: 'jenkins-get-started-rg'
+                location: 'eastus'
+                templateLocation: 'Linked artifact'
+                csmFile: '$(System.DefaultWorkingDirectory)/Publish/arm/vm-jenkins.json'  # Relative path within your repository
+                deploymentMode: 'Incremental' 
+
         - task: AzureCLI@2
           displayName: 'Azure CLI - Promote Service Principal'
           inputs:
@@ -28,15 +39,6 @@ steps:
                     Write-Host "##vso[task.setvariable variable=ARM_TENANT_ID]$env:tenantId"
             addSpnToEnvironment: true
             
-        - task: AzureResourceGroupDeployment@2
-          inputs:
-                azureSubscription: 'AzureServiceConnection'
-                action: 'Create Or Update Resource Group'
-                resourceGroupName: 'jenkins-get-started-rg'
-                location: 'East US'
-                templateLocation: 'Linked artifact'
-                csmFile: '$(System.DefaultWorkingDirectory)/Publish/arm/vm-jenkins.json'  # Relative path within your repository
-                deploymentMode: 'Incremental' 
         - task: AzurePowerShell@5
           displayName: Connect with Az
           inputs:
