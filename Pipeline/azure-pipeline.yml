@@ -38,7 +38,7 @@ steps:
                 resourceGroupName: 'jenkins-get-started-rg'
                 location: 'East US'
                 templateLocation: 'Linked artifact'
-                csmFile: '/arm/vm-jenkins.json'  # Relative path within your repository
+                csmFile: '$(System.DefaultWorkingDirectory)/arm/vm-jenkins.json'  # Relative path within your repository
                 deploymentMode: 'Incremental'
        
         - task: AzureCLI@2
