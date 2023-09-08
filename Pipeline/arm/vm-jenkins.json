@@ -4,7 +4,7 @@
     "resources": [
       {
       "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2022-03-01",
+      "apiVersion": "2023-04-01",
       "name": "jenkins-vnet",
       "location": "eastus",
       "properties": {
@@ -23,7 +23,7 @@
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2022-03-01",
+      "apiVersion": "2023-04-01",
       "name": "jenkins-NIC",
       "location": "eastus",
       "properties": {
