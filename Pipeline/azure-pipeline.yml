@@ -6,7 +6,6 @@ pool:
 
 steps:
   - script: |
-      # Azure CLI commands to deploy the ARM template
       az group create --name jenkins-get-started-rg --location eastus
       az deployment group create --resource-group jenkins-get-started-rg --template-file /arm/vm-jenkins.json
     displayName: 'Deploy ARM Template'
@@ -17,7 +16,6 @@ steps:
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        # Azure CLI commands to retrieve VM IP address and run installation script
         vm_ip=$(az vm show -g jenkins-get-started-rg -n jenkins-vm --query publicIps -o tsv)
         ssh zeeshan.abbas@hotmail.co.uk@$vm_ip 'bash -s' < install-jenkins.sh
     displayName: 'Install Jenkins on VM'
