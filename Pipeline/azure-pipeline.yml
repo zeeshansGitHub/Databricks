@@ -9,10 +9,8 @@ steps:
         - pwsh: |
             Get-ChildItem $(System.DefaultWorkingDirectory) -Recurse
           name: CheckoutRecursive
-        - checkout: self  
-        - pwsh: |
-            Copy-Item -Path $(System.DefaultWorkingDirectory)/ -Destination $(System.DefaultWorkingDirectory)/Publish/ -Recurse
-          name: CopyTemplates
+        
+        
 
         - task: AzureCLI@2
           displayName: 'Azure CLI - Promote Service Principal'
@@ -47,7 +45,7 @@ steps:
                 resourceGroupName: 'jenkins-get-started-rg'
                 location: 'East US'
                 templateLocation: 'Linked artifact'
-                csmFile: '$(System.DefaultWorkingDirectory)/Publish/arm/vm-jenkins.json'  # Relative path within your repository
+                csmFile: '$(System.DefaultWorkingDirectory)/arm/vm-jenkins.json'  # Relative path within your repository
                 deploymentMode: 'Incremental'
        
         - task: AzureCLI@2
