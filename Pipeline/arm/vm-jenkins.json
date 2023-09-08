@@ -15,12 +15,10 @@
            "networkProfile": {
                 "networkInterfaces": [
                     {
-                        "id": "[resourceId('Microsoft.Network/networkInterfaces',
-              concat('jenkins-vm-nic', copyindex()))]" 
+                        "id": "[resourceId('Microsoft.Network/networkInterfaces',concat('jenkins-vm-nic', copyindex()))]" 
                     }
                 ]
            },
-
           "storageProfile": {
             "imageReference": {
               "publisher": "Canonical",
