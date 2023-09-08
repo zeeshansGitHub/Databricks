@@ -3,6 +3,43 @@
     "contentVersion": "1.0.0.0",
     "resources": [
       {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2022-03-01",
+      "name": "jenkins-vnet",
+      "location": "East US",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": ["10.0.0.0/16"]
+        },
+        "subnets": [
+          {
+            "name": "jenkins-subnet",
+            "properties": {
+              "addressPrefix": "10.0.1.0/24"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2022-03-01",
+      "name": "jenkins-NIC",
+      "location": "East US",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "jenkins-IPConfig",
+            "properties": {
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'jenkins-vnet', 'jenkins-subnet')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
         "type": "Microsoft.Compute/virtualMachines",
         "apiVersion": "2022-03-01",
         "name": "jenkins-vm",
@@ -15,7 +52,7 @@
            "networkProfile": {
                 "networkInterfaces": [
                     {
-                        "id": "[resourceId('Microsoft.Network/networkInterfaces','jenkins-vm-nic')]" 
+                        "id": "[resourceId('Microsoft.Network/networkInterfaces','jenkins-NIC')]" 
                     }
                 ]
            },
