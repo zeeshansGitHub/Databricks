@@ -15,7 +15,7 @@
            "networkProfile": {
                 "networkInterfaces": [
                     {
-                        "id": "[resourceId('Microsoft.Network/networkInterfaces',concat('jenkins-vm-nic', copyindex()))]" 
+                        "id": "[resourceId('Microsoft.Network/networkInterfaces','jenkins-vm-nic')]" 
                     }
                 ]
            },
