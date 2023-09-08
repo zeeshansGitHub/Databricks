@@ -73,7 +73,36 @@
             "adminPassword": "Pass@word123"  // or use SSH key
           }
         }
+      },
+      {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2023-04-01",
+      "name": "jenkins-nic",
+      "location": "eastus",
+      "dependsOn": [],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "jenkins-ipconfig",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'jenkins-public-ip')]"
+              }
+            }
+          }
+        ]
       }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2023-04-01",
+      "name": "jenkins-public-ip",
+      "location": "eastus",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic"
+      }
+    }
     ]
   }
   
