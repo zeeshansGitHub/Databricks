@@ -8,9 +8,9 @@ steps:
         - checkout: self  
         - pwsh: |
             Get-ChildItem $(System.DefaultWorkingDirectory) -Recurse
+            Copy-Item -Path $(System.DefaultWorkingDirectory)/ -Destination $(System.DefaultWorkingDirectory)/Publish/ -Recurse
           name: CheckoutRecursive
-        
-        
+              
 
         - task: AzureCLI@2
           displayName: 'Azure CLI - Promote Service Principal'
