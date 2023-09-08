@@ -8,7 +8,7 @@ steps:
         - task: AzureCLI@2
           displayName: 'Azure CLI - Promote Service Principal'
           inputs:
-            azureSubscription: '${{parameters.serviceConnection}}'
+            azureSubscription: 'AzureServiceConnection'
             scriptType: pscore
             scriptLocation: inlineScript
             inlineScript: |
@@ -21,7 +21,7 @@ steps:
         - task: AzurePowerShell@5
           displayName: Connect with Az
           inputs:
-            azureSubscription: '${{parameters.serviceConnection}}'
+            azureSubscription: 'AzureServiceConnection'
             ScriptType: InlineScript
             Inline: |
                  
