@@ -51,43 +51,44 @@
           }
         ]
       }
-    },
+    }
     
-    {
-        "type": "Microsoft.Compute/virtualMachines",
-        "apiVersion": "2022-03-01",
-        "name": "jenkins-vm",
-        "location": "[resourceGroup().location]",
-        "dependsOn": [],
-        "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_DS2_v2"
-          },
-           "networkProfile": {
-                "networkInterfaces": [
-                    {
-                        "id": "[resourceId('Microsoft.Network/networkInterfaces','jenkins-NIC')]" 
-                    }
-                ]
-           },
-          "storageProfile": {
-            "imageReference": {
-              "publisher": "Canonical",
-              "offer": "UbuntuServer",
-              "sku": "18.04-LTS",
-              "version": "latest"
-            },
-            "osDisk": {
-              "createOption": "FromImage"
-            }
-          },
-          "osProfile": {
-            "computerName": "jenkins-vm",
-            "adminUsername": "adminuser",
-            "adminPassword": "Pass@word123"  // or use SSH key
-          }
-        }
-      }
+    
+    // {
+    //     "type": "Microsoft.Compute/virtualMachines",
+    //     "apiVersion": "2022-03-01",
+    //     "name": "jenkins-vm",
+    //     "location": "[resourceGroup().location]",
+    //     "dependsOn": [],
+    //     "properties": {
+    //       "hardwareProfile": {
+    //         "vmSize": "Standard_DS2_v2"
+    //       },
+    //        "networkProfile": {
+    //             "networkInterfaces": [
+    //                 {
+    //                     "id": "[resourceId('Microsoft.Network/networkInterfaces','jenkins-NIC')]" 
+    //                 }
+    //             ]
+    //        },
+    //       "storageProfile": {
+    //         "imageReference": {
+    //           "publisher": "Canonical",
+    //           "offer": "UbuntuServer",
+    //           "sku": "18.04-LTS",
+    //           "version": "latest"
+    //         },
+    //         "osDisk": {
+    //           "createOption": "FromImage"
+    //         }
+    //       },
+    //       "osProfile": {
+    //         "computerName": "jenkins-vm",
+    //         "adminUsername": "adminuser",
+    //         "adminPassword": "Pass@word123"  // or use SSH key
+    //       }
+    //     }
+    //   }
       
     ]
   }
