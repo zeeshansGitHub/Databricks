@@ -31,22 +31,16 @@ steps:
                    az login --service-principal --username  $username --password $password --tenant $tenantId
 
             azurePowerShellVersion: 'LatestVersion'
-        - task: AzurePowerShell@5
-          displayName: Create Jenkins Virtual Machine
+        - task: AzureResourceGroupDeployment@2
           inputs:
-            azureSubscription: 'AzureServiceConnection'
-            ScriptType: InlineScript
-            Inline: |
-                 
-                   az group create --name jenkins-get-started-rg --location eastus
-                   az deployment group create --resource-group jenkins-get-started-rg --template-file /arm/vm-jenkins.json
-                   
-
-            azurePowerShellVersion: 'LatestVersion'
-        - script: |
-                az group create --name jenkins-get-started-rg --location eastus
-                az deployment group create --resource-group jenkins-get-started-rg --template-file /arm/vm-jenkins.json
-                displayName: 'Deploy ARM Template'
+                azureSubscription: 'AzureServiceConnection'
+                action: 'Create Or Update Resource Group'
+                resourceGroupName: 'jenkins-get-started-rg'
+                location: 'East US'
+                templateLocation: 'Linked artifact'
+                csmFile: '/arm/vm-jenkins.json'  # Relative path within your repository
+                deploymentMode: 'Incremental'
+       
         - task: AzureCLI@2
           inputs:
                 azureSubscription: 'AzureServiceConnection'  # Replace with your Azure service connection
