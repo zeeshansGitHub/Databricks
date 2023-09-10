@@ -7,7 +7,7 @@ pipeline {
         NOTEBOOK_PATH = '/Users/zeeshan.abbas@hotmail.co.uk/' // Replace with the desired path in Databricks
         GITHUB_REPO_URL = 'https://github.com/zeeshansGitHub/Databricks.git' // Replace with your GitHub repository URL
         GITHUB_REPO_BRANCH = 'main' // Replace with the branch containing your notebook
-        GITHUB_NOTEBOOK_PATH = 'Read-csv.ipynb' // Path to the .ipynb notebook file in your GitHub repo
+        GITHUB_NOTEBOOK_PATH = 'Python_VS_Databricks.py' // Path to the .ipynb notebook file in your GitHub repo
         GITHUB_CREDENTIALS = credentials('aaa17aad-43a8-4f40-862f-20e2d62a45f9')
         EXISTING_CLUSTER_ID = '0907-160409-unfd8z3n'
     }
@@ -23,19 +23,19 @@ pipeline {
             }
         }
 
-        stage('Upload Notebook') {
+        stage('Upload Notebook to Databricks') {
             steps {
                 script {
                     // Read the notebook file content
                     def notebookContent = readFile(GITHUB_NOTEBOOK_PATH)
-                    def base64Content = notebookContent.bytes.encodeBase64().toString()
+            
                     // Define the HTTP POST request to import the notebook
                     def response = sh(script: '''
                     curl -n -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
                     -H "Content-Type: application/json" \
                     -d '{
                         "existing_cluster_id": "${existingClusterId}",
-                        "content": "$base64Content",
+                        "content": "$notebookContent",
                         "path": "$NOTEBOOK_PATH",
                         "overwrite": true
                     }' \
