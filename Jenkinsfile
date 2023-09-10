@@ -30,7 +30,7 @@ pipeline {
                     def notebookContent = readFile(GITHUB_NOTEBOOK_PATH)
                     // Remove the dollar sign ('$') character
                     def cleanedContent = notebookContent.replaceAll('\\$', '')
-                    def trimmedContent = notebookContent.trim()
+                    def trimmedContent = cleanedContent.trim()
                     def base64Content = trimmedContent.bytes.encodeBase64().toString()
                     base64Content = Base64.getUrlDecoder().decode(base64Content)
 
