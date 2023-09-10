@@ -28,14 +28,17 @@ pipeline {
                 script {
                     // Read the notebook file content
                     def notebookContent = readFile(GITHUB_NOTEBOOK_PATH)
-            
+                    // Remove the dollar sign ('$') character
+                    def cleanedContent = notebookContent.replaceAll('\\$', '')
+                    // def base64Content = cleanedContent.bytes.encodeBase64().toString()
+
                     // Define the HTTP POST request to import the notebook
                     def response = sh(script: '''
                     curl -n -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
                     -H "Content-Type: application/json" \
                     -d '{
                         "existing_cluster_id": "${existingClusterId}",
-                        "content": "${notebookContent}",
+                        "content": "${cleanedContent}",
                         "path": "${NOTEBOOK_PATH}",
                         "overwrite": true
                     }' \
