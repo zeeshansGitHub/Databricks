@@ -38,9 +38,9 @@ pipeline {
                     -H "Content-Type: application/json" \
                     -d '{
                         
-                        \"existing_cluster_id\": \"${existingClusterId}\",
-                        \"content\": \"${notebookContent}\",
-                        \"path\": \"${NOTEBOOK_PATH}\",
+                        \"existing_cluster_id\": \"${existingClusterId}\"
+                        \"content\": \"${notebookContent}\"
+                        \"path\": \"${NOTEBOOK_PATH}\"
                         \"overwrite\": true
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
