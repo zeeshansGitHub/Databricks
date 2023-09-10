@@ -28,6 +28,7 @@ pipeline {
                 script {
                     // Read the notebook file content
                     def notebookContent = readFile(env.GITHUB_NOTEBOOK_PATH)
+                    def notebookPath = env.NOTEBOOK_PATH
                     // Remove the dollar sign ('$') character
                     def cleanedContent = notebookContent.replaceAll('\\$', '')
                     def trimmedContent = cleanedContent.trim()
@@ -41,7 +42,8 @@ pipeline {
                     -d '{
                         "job_id": null,
                         "existing_cluster_id": "${existingClusterId}",
-                        "content": "'"$base64Content"'"
+                        "content": "'"$base64Content"'",
+                        "path": "${notebookPath}"
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
                 ''', returnStdout: true)
