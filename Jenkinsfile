@@ -27,13 +27,13 @@ pipeline {
             steps {
                 script {
                     // Read the notebook file content
-                    def notebookContent = readFile(env.GITHUB_NOTEBOOK_PATH)
-                    def notebookPath = env.NOTEBOOK_PATH
+                    def notebookContent = readFile("Read-csv.ipynb")
+                    def notebookPath = '/Users/zeeshan.abbas@hotmail.co.uk/'
                     // Remove the dollar sign ('$') character
                     def cleanedContent = notebookContent.replaceAll('\\$', '')
                     def trimmedContent = cleanedContent.trim()
                     def base64Content = trimmedContent.bytes.encodeBase64().toString()
-                    def existingClusterId  = env.EXISTING_CLUSTER_ID;
+                    def existingClusterId  = "0907-160409-unfd8z3n";
                     echo "Notebook Path: $notebookPath";
 
                     // Define the HTTP POST request to import the notebook
