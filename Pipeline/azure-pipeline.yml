@@ -53,7 +53,24 @@ steps:
 
             azurePowerShellVersion: 'LatestVersion'
         
-       
+        - task: AzureCLI@2
+          inputs:
+                azureSubscription: 'AzureServiceConnection'  # Replace with your Azure service connection
+                scriptType: 'bash'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                    az network nsg rule create --resource-group jenkins-get-started-rg \
+                    --nsg-name YourNSGName \
+                    --name AllowSSH \
+                    --priority 1000 \
+                    --source-address-prefix '*' \
+                    --source-port-range '*' \
+                    --destination-address-prefix '*' \
+                    --destination-port-range 22 \
+                    --access Allow \
+                    --protocol Tcp \
+                    --description "Allow SSH traffic"
+                displayName: 'Install Jenkins on VM'
         - task: AzureCLI@2
           inputs:
                 azureSubscription: 'AzureServiceConnection'  # Replace with your Azure service connection
