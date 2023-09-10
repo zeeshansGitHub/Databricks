@@ -34,6 +34,7 @@ pipeline {
                     def trimmedContent = cleanedContent.trim()
                     def base64Content = trimmedContent.bytes.encodeBase64().toString()
                     def existingClusterId  = env.EXISTING_CLUSTER_ID;
+                    echo "Notebook Path: $notebookPath";
 
                     // Define the HTTP POST request to import the notebook
                     def response = sh(script: '''
