@@ -37,11 +37,11 @@ pipeline {
                     curl -n -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
                     -H "Content-Type: application/json" \
                     -d '{
-                        
-                        \"existing_cluster_id\": \"${existingClusterId}\"
-                        \"content\": \"${notebookContent}\"
-                        \"path\": \"${NOTEBOOK_PATH}\"
-                        \"overwrite\": true
+                        "job_id": null,
+                        "existing_cluster_id": "${existingClusterId}",
+                        "content": "${notebookContent}",
+                        "path": "${NOTEBOOK_PATH}",
+                        "overwrite": true
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
                 ''', returnStdout: true)
