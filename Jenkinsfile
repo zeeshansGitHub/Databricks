@@ -38,7 +38,7 @@ pipeline {
                     -H "Content-Type: application/json" \
                     -d '{
                         "existing_cluster_id": "${existingClusterId}",
-                        "content": "${base64Content}",
+                        "content": "${notebookContent}",
                         "path": "${NOTEBOOK_PATH}",
                         "overwrite": true
                     }' \
