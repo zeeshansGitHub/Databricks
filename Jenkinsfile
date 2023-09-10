@@ -41,8 +41,7 @@ pipeline {
                     -d '{
                         "job_id": null,
                         "existing_cluster_id": "${existingClusterId}",
-                        "content": "'"$base64Content"'",
-                        "path": "${NOTEBOOK_PATH}"
+                        "content": "'"$base64Content"'"
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
                 ''', returnStdout: true)
