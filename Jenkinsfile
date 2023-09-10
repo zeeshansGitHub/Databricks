@@ -44,7 +44,7 @@ pipeline {
                         "job_id": null,
                         "existing_cluster_id": "${existingClusterId}",
                         "content": "'"$base64Content"'",
-                        "path": "/Users/zeeshan.abbas@hotmail.co.uk/"
+                        "path": "/Users/zeeshan.abbas@hotmail.co.uk/test23.ipynb"
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
                 ''', returnStdout: true)
