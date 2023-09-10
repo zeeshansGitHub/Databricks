@@ -28,14 +28,14 @@ pipeline {
                 script {
                     // Read the notebook file content
                     def notebookContent = readFile(GITHUB_NOTEBOOK_PATH)
-
+                    def base64Content = notebookContent.bytes.encodeBase64().toString()
                     // Define the HTTP POST request to import the notebook
                     def response = sh(script: '''
                     curl -n -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
                     -H "Content-Type: application/json" \
                     -d '{
                         "existing_cluster_id": "${existingClusterId}",
-                        "content": "$notebookContent",
+                        "content": "$base64Content",
                         "path": "$NOTEBOOK_PATH",
                         "overwrite": true
                     }' \
