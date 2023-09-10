@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('Upload Notebook to Databricks') {
+        stage('Upload Notebook') {
             steps {
                 script {
                     // Read the notebook file content
