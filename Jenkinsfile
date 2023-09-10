@@ -27,12 +27,12 @@ pipeline {
             steps {
                 script {
                     // Read the notebook file content
-                    def notebookContent = readFile(GITHUB_NOTEBOOK_PATH)
+                    def notebookContent = readFile(env.GITHUB_NOTEBOOK_PATH)
                     // Remove the dollar sign ('$') character
                     def cleanedContent = notebookContent.replaceAll('\\$', '')
                     def trimmedContent = cleanedContent.trim()
                     def base64Content = trimmedContent.bytes.encodeBase64().toString()
-                    
+                    def existingClusterId  = env.EXISTING_CLUSTER_ID;
 
                     // Define the HTTP POST request to import the notebook
                     def response = sh(script: '''
