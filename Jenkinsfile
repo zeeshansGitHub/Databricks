@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Read the notebook file content
-                    def notebookContent = readFile("Read-csv.ipynb")
+                    def notebookContent = readFile("https://github.com/zeeshansGitHub/Read-csv.ipynb")
                     def notebookPath = '/Users/zeeshan.abbas@hotmail.co.uk/'
                     // Remove the dollar sign ('$') character
                     def cleanedContent = notebookContent.replaceAll('\\$', '')
