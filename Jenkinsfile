@@ -27,8 +27,8 @@ pipeline {
             steps {
                 script {
                     // Read the notebook file content
-                    def notebookContent = readFile("sssRead-csv.ipynb")
-                    def notebookPath = '/Users/zeeshan.abbas@hotmail.co.uk/'
+                    def notebookContent = readFile("Read-csv.ipynb")
+                    def notebookPath = '/Users/zeeshan.abbas@hotmail.co.uk/Read-csv.ipynb'
                     // Remove the dollar sign ('$') character
                     def cleanedContent = notebookContent.replaceAll('\\$', '')
                     def trimmedContent = cleanedContent.trim()
@@ -44,7 +44,7 @@ pipeline {
                         "job_id": null,
                         "existing_cluster_id": "${existingClusterId}",
                         "content": "'"$base64Content"'",
-                        "path": "/Users/zeeshan.abbas@hotmail.co.uk/test23.ipynb"
+                        "path": "/Users/zeeshan.abbas@hotmail.co.uk/Read-csv.ipynb"
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
                 ''', returnStdout: true)
