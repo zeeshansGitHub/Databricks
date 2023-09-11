@@ -28,12 +28,11 @@ pipeline {
                 script {
                     // Read the notebook file content
                     def notebookContent = readFile("Test-Notebook22.ipynb")
-                    def encoded_content = base64.b64encode(content).decode('utf-8')
                     def notebookPath = '/Users/zeeshan.abbas@hotmail.co.uk/Test-Notebook22.ipynb'
                     // Remove the dollar sign ('$') character
-                    def cleanedContent = notebookContent.replaceAll('\\$', '')
-                    def trimmedContent = cleanedContent.trim()
-                    def base64Content = trimmedContent.bytes.encodeBase64().toString()
+                    def encodedContent = notebookContent.bytes.encodeBase64().toString()
+
+                    echo "Base64-encoded content: $encodedContent"
                     def existingClusterId  = "0907-160409-unfd8z3n";
                     echo "Notebook Path: $notebookPath";
 
@@ -44,7 +43,7 @@ pipeline {
                     -d '{
                         "job_id": null,
                         "existing_cluster_id": "0907-160409-unfd8z3n",
-                        "content": "${encoded_content}",
+                        "content": "${encodedContent}",
                         "path": "/Users/zeeshan.abbas@hotmail.co.uk/Test-Notebook22.ipynb"
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
