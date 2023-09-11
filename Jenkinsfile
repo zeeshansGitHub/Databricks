@@ -43,7 +43,7 @@ pipeline {
                     -d '{
                         "job_id": null,
                         "existing_cluster_id": "0907-160409-unfd8z3n",
-                        "content": "'"$notebookContent"'",
+                        "content": "ssssss",
                         "path": "/Users/zeeshan.abbas@hotmail.co.uk/Test-Notebook22.ipynb"
                     }' \
                     --url "$DATABRICKS_WORKSPACE_URL/api/2.0/workspace/import"
